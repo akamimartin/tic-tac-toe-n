@@ -1,0 +1,25 @@
+ var student_array = [
+    {name:'Travis'},
+    {name:'Keith'},
+    {name:'Parris'}
+];
+for(var i=0; i<student_array.length;i++){
+    var div = $('<div>',{
+        text:student_array[i].name,
+        data_index:i
+    });
+    div.click(function(){
+        console.log("I am",this);
+        var index = $(this).attr('data_index');
+                      console.log(index + 'was clicked');
+        console.log($(this).attr('data_index')+' was clicked');
+        delete student_array[index];
+        console.log('student array is being deleted: ' , student_array);
+         
+    });
+    $('body').append(div);
+}
+//console.log(student_array);
+//var del_num = prompt('Delete which student?');
+//delete student_array[del_num];
+//console.log(student_array);

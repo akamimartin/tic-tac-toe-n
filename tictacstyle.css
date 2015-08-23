@@ -1,0 +1,58 @@
+body {
+    height: 100%;
+    width: 100%;
+    background-image: url(images/zen9.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+header {
+    color: white;
+    font-weight: bolder;
+    margin-left: -30px;
+}
+#gametitle {
+    text-align: center;
+    font-size: 60px;
+}
+#gameheader {
+    //border: 1px solid black;
+    height: 14vh;
+}
+#squarescontainer {
+    height: 100vh;
+    margin-top: 35vh;
+}
+#playerinfo {
+    //border: 1px solid black;
+    height: 109vh;
+    margin-top: 6vh;
+    color: white;
+    fontsize: 60%;
+    font-weight: bolder;
+}
+.gamesquares {
+    height: 8%;
+    bold margin-top: 3vh;
+    margin-bottom: 3vh;
+    width: 9%;
+}
+.top {
+    margin-top: 3vh;
+}
+.selected1 {
+    position: absolute:
+}
+.selected2 {
+    position: absolute:
+}
+#player1a {
+    border: 3px solid white;
+    color: white;
+    fontsize: 4em;
+    font-weight: bolder;
+}
+#player2a {
+    color: white;
+    fontsize: 4em;
+    font-weight: bolder;
+}

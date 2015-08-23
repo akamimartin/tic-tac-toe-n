@@ -1,0 +1,365 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+    <title>Zen Tic-Tac-Toe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="tictacstyle.css">
+    <script>
+        var ticTacArray = ['', '', '',
+            '', '', '',
+            '', '', ''
+        ];
+
+
+        var player1 = true;
+        var game_won = false;
+
+        var winConditionsString = '';
+
+        var width = Math.sqrt(ticTacArray.length);
+        console.log('width', width);
+        var height = Math.sqrt(ticTacArray.length);
+        console.log('height', height);
+
+        function generateWinConditions() {
+            winConditions = [];
+
+            for (x = 0; x < width; x++) {
+                winConditionsString = '';
+                for (y = 0; y <= ((width) * (height - 1)); y += width) {
+                    winConditionsString += (x + y);
+                    console.log('winConditionsString', winConditionsString);
+
+                }
+                winConditions.push(winConditionsString);
+                console.log('winConditions:', winConditions);
+            }
+            for (y = 0; y <= ((width) * (height - 1)); y += width) {
+                winConditionsString = '';
+                for (x = 0; x < width; x++) {
+                    winConditionsString += (x + y);
+                    console.log('winConditionsString', winConditionsString);
+
+                }
+                winConditions.push(winConditionsString);
+                console.log('winConditions:', winConditions);
+            }
+            winConditionsString = '';
+            for (var i = 0; i < (height * width); i += (width + 1)) {
+
+                winConditionsString += i;
+                console.log('winConditionsString:', winConditionsString)
+            }
+            winConditions.push(winConditionsString);
+            console.log('winConditions:', winConditions);
+            winConditionsString = '';
+            for (var i = (width * (height - 1)); i >= width - 1; i -= width - 1) {
+                winConditionsString += i;
+                console.log('winConditionsString:', winConditionsString)
+            }
+            winConditions.push(winConditionsString);
+            console.log('winConditions:', winConditions);
+
+        }
+
+
+
+        generateWinConditions();
+        console.log('winConditions: ' + winConditions);
+
+
+        function iterateForWin() {
+            var player1 = /x/;
+            var player2 = /o/
+            for (var i = 0; i < (winConditions.length); i++) {
+                console.log('winConditions:', winConditions);
+                currentWin = '';
+                console.log('---------------------------------------------');
+                for (j = 0; j < width; j++) {
+                    console.log('j: ' + j);
+                    currentWin += ticTacArray[winConditions[i][j]];
+                    console.log('currentWin ' + currentWin);
+                    console.log('winConditions: ' + winConditions[i]);
+                    if (currentWin.length == width) {
+                        console.log('currentWin.length == width): ' + currentWin.length == width);
+                        if (player1.test(currentWin)) {
+                            if (currentWin.match(/x/g).length == width) {
+                                console.log("checking for x")
+                                console.log('game won');
+                                game_won = true;
+                                console.log('game won');
+                                $('#myModal').modal('show');
+                                $('.modal-body > p').text('Player 1 wins!');
+                            }
+                        };
+
+                    }
+                    if (player2.test(currentWin)) {
+
+                        if (currentWin.match(/o/g).length == width) {
+                            console.log('checking for o')
+                            console.log('game won');
+                            game_won = true;
+                            console.log('game won');
+                            $('.modal-body > p').text('Player 2 wins!');;
+                            $('#myModal').modal('show');
+                        }
+
+
+
+                    }
+                }
+
+            }
+        }
+
+
+        
+
+        function generate_game_board() {
+            var square_container = $('<div>', {
+                class: "col-sm-7 col-sm-offset-1",
+                id: "squarescontainer",
+            });
+
+            var square1 = $('<div>', {
+                id: 'square1',
+                class: "top gamesquares col-sm-2 col-sm-offset-2",
+                css: {
+                    color: "white",
+                    background: "url(images/rock1.jpg)",
+                    height: "10%",
+                    width: "10%",
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat"
+
+                }
+
+            }).attr('index', '0');
+
+            var square2 = $('<div>', {
+                /*  <img src="cinqueterre.jpg" class="img-circle" alt="Cinque Terre" width="60" height="60"> */
+                id: 'square2',
+                class: "top gamesquares col-sm-2 col-sm-offset-2",
+                css: {
+                    background: "url(images/rock1a.jpg)",
+                    height: "10%",
+                    width: "10%",
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat"
+                }
+
+            }).attr('index', '1');
+
+            var square3 = $('<div>', {
+                id: 'square3',
+                class: "top gamesquares col-sm-2 col-sm-offset-2",
+                css: {
+                    background: "url(images/rock1.jpg)",
+                    height: "10%",
+                    width: "10%",
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat"
+                }
+
+            }).attr('index', '2');
+
+            var square4 = $('<div>', {
+                id: 'square4',
+                class: "gamesquares col-sm-2 col-sm-offset-2",
+                css: {
+                    background: "url(images/rock1a.jpg)",
+                    height: "10%",
+                    width: "10%",
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat"
+                }
+
+            }).attr('index', '3');
+
+            var square5 = $('<div>', {
+                id: 'square5',
+                class: "gamesquares col-sm-2 col-sm-offset-2",
+                css: {
+                    background: "url(images/rock1.jpg)",
+                    height: "10%",
+                    width: "10%",
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat"
+                }
+
+            }).attr('index', '4');
+
+            var square6 = $('<div>', {
+                id: 'square6',
+                class: "gamesquares col-sm-2 col-sm-offset-2",
+                css: {
+                    background: "url(images/rock1a.jpg)",
+                    height: "10%",
+                    width: "10%",
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat"
+                }
+
+            }).attr('index', '5');
+
+            var square7 = $('<div>', {
+                id: 'square7',
+                class: "gamesquares col-sm-2 col-sm-offset-2",
+                css: {
+                    background: "url(images/rock1.jpg)",
+                    height: "10%",
+                    width: "10%",
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat"
+                }
+            }).attr('index', '6');
+
+            var square8 = $('<div>', {
+                id: 'square8',
+                class: "gamesquares col-sm-2 col-sm-offset-2",
+                css: {
+                    background: "url(images/rock1a.jpg)",
+                    height: "10%",
+                    width: "10%",
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat"
+                }
+            }).attr('index', '7');
+
+            var square9 = $('<div>', {
+                id: 'square9',
+                class: "gamesquares col-sm-2 col-sm-offset-2",
+                css: {
+                    background: "url(images/rock1.jpg)",
+                    height: "10%",
+                    width: "10%",
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat"
+                }
+            }).attr('index', '8');
+
+            var player_info = $('<div>', {
+                class: "col-sm-3 col-sm-offset-1",
+                id: "playerinfo",
+            });
+
+            var player_1 = $('<div>', {
+                class: "player1data",
+                id: "player1",
+                text: 'Player 1: ' + ' X ',
+            });
+
+            var player_2 = $('<div>', {
+                class: "player1data",
+                id: "player2",
+                text: 'Player 2: ' + ' O',
+            });
+
+
+
+            square_container.append(square1, square2, square3, square4, square5, square6, square7, square8, square9);
+            player_info.append(player_1, player_2);
+
+            $('body').append(square_container, player_info);
+        }
+
+ 
+        $(document).ready(function() {
+            /*Janet made changes to this code */
+            generate_game_board();
+            $('#squarescontainer').on('click', '.gamesquares', function() {
+                if (player1) {
+                    $(this).addClass('selected1');
+                    $(this).fadeOut(1500, function() {
+                        $('.selected1').text('X').css({
+                            'background-image': 'none',
+                            'color': 'white'
+                        }).fadeIn(1000).animate({
+                            fontSize: "3em"
+                        });
+                        $('#player2').css({
+                            'border': '0px  ',
+                            'width': '50%'
+                        });
+                        $("#player1").addClass('player1text').css({
+                            'border': '1px solid white',
+                            'width': '50%'
+                        });
+
+
+                    });
+                    console.log('button was clicked');
+                    console.log($(this).attr('index'));
+                    ticTacArray[$(this).attr('index')] = 'x';
+                    console.log(ticTacArray);
+                    player1 = !player1;
+
+                } else {
+                    $(this).addClass('selected2');
+                    $(this).fadeOut(2000, function() {
+                        $('.selected2').text('O').css({
+                            'background-image': 'none',
+                            'color': '#474747'
+                        }).fadeIn(1000).animate({
+                            fontSize: "3em"
+                        });
+                    });
+
+                    $('.player1text').css({
+                        'border': '0px  ',
+                        'width': '50%'
+                    });
+                    $("#player2").addClass('player2text').css({
+                        'border': '1px solid white',
+                        'width': '50%'
+                    });
+                    console.log('button was clicked');
+                    console.log($(this).attr('index'));
+                    ticTacArray[$(this).attr('index')] = 'o';
+                    console.log(ticTacArray);
+                    player1 = !player1;
+
+                }
+                iterateForWin();
+
+
+            });
+        });
+
+      
+    </script>
+</head>
+
+<body>
+    <header class="col-sm-12" id="gameheader">
+        <h1 id="gametitle">Zen Tic-Tac-Toe</h1>
+    </header>
+    <!-- Trigger the modal with a button
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <!--Change to modal-sm -- Janet -->
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">You Won</h4>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
